@@ -1,0 +1,9 @@
+version: "3"
+services:
+  marathon-apps-exporter:
+    image: agate/marathon-apps-exporter
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - 3000:3000

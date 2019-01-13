@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Marathon Apps Exporter</title>
+  </head>
+  <body>
+    <div class="container text-center">
+      <h1 class="mt-5 mb-5">Marathon Apps Exporter</h1>
+
+      <div class="row justify-content-center">
+        <form action="/metrics" method="get" class="col-md-8">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="base-url"></span>
+            </div>
+            <input type="text" class="form-control" name="marathon-url">
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="submit" id="go">Try It</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <footer class="mt-4 pt-3 pb-5 border-top">
+        <div class="row justify-content-center">
+          <!-- Place this tag where you want the button to render. -->
+          <a class="github-button" href="https://github.com/agate/marathon-apps-exporter" data-size="large" data-show-count="true" aria-label="Star agate/marathon-apps-exporter on GitHub">Star</a>
+        </div>
+      </footer>
+    </div>
+    <script>
+      document.querySelector('#base-url').innerHTML = window.location.origin + "/metrics?marathon-url="
+    </script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </body>
+</html>
