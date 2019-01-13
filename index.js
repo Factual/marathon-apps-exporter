@@ -39,14 +39,12 @@ async function generateMetrics(marathonUrl, timestamp) {
 const app = connect()
 app.use((req, res, next) => {
   const [ path, query ] = req.url.split('?')
-  console.log(req.url, path, query)
   req.path = path
   req.query = query ? qs.parse(query) : {}
   next()
 })
 
 app.use(async (req, res) => {
-  console.log(req.path)
   if (req.path != '/metrics') {
     res.end(README)
   } else {
