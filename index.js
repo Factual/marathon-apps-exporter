@@ -14,7 +14,7 @@ async function getApps(marathonUrl) {
   return JSON.parse(body)['apps']
 }
 
-async function generateMetrics(marathonUrl, timestamp) {
+async function generateMetrics(marathonUrl) {
   const apps = await getApps(marathonUrl)
   const metrics = []
 
@@ -28,7 +28,7 @@ async function generateMetrics(marathonUrl, timestamp) {
       'tasksHealthy',
       'tasksUnhealthy',
     ].forEach((attr) => {
-      metrics.push(`marathon_app_${attr}{id="${app.id}"} ${app[attr]} ${timestamp}`)
+      metrics.push(`marathon_app_${attr}{id="${app.id}"} ${app[attr]}`)
     })
     metrics.push('')
   })
@@ -50,10 +50,12 @@ app.use(async (req, res) => {
   } else {
     const marathonUrl = req.query['marathon-url']
     try {
-      res.end(await generateMetrics(marathonUrl, Date.now()))
+      res.end(await generateMetrics(marathonUrl))
     } catch (e) {
       res.statusCode = 500
-      res.end('ERROR')
+      res.write('ERROR\n')
+      res.write(e.toString())
+      res.end()
     }
   }
 })
