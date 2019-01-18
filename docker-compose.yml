@@ -1,7 +1,7 @@
 version: "3"
 services:
   marathon-apps-exporter:
-    image: agate/marathon-apps-exporter
+    image: factual/marathon-apps-exporter
     build: .
     volumes:
       - .:/app
