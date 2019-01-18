@@ -1,5 +1,5 @@
 {
-  "name": "marathon-apps-exporter",
+  "name": "@factual/marathon-apps-exporter",
   "version": "1.0.0",
   "description": "Marathon Apps Metrics Exporter",
   "author": "Hao Hong <honghao@factual.com>",
