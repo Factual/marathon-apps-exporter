@@ -1,10 +1,51 @@
 # Marathon Apps Exporter
 
+An exporter for generating marathon applications related metrics.
+
+## Why do I want this?
+
+If you are using [Prometheus](https://prometheus.io/) and you want to collect your marathon applications metrics. For example how many instances / cpus / memory that used by an application, if an application is healthy running for serving users need. Then this exporter is exactly designed for you.
+
+Currently, it exports those marathon application metrics.
+
+* instances
+* cpus
+* mem
+* tasksStaged
+* tasksRunning
+* tasksHealthy
+* tasksUnhealthy
+
+After you integrate it with your Prometheus. You will able to query marathon applications historical data like
+
+`marathon_app_tasksHealthy{id="/your/application/id"}`
+
+or
+
+`marathon_app_instances{id="/your/application/id"} * marathon_app_mem{id="/your/application/id"}`
+
+And you will be able to integrate it with your [Grafana](https://grafana.com/) to create useful charts or alerts.
+
 ## Quick Starts
+
+### Start server
 
 Run `docker run -p 3000:3000 factual/marathon-apps-exporter`
 
-Then visit http://localhost:3000
+### Access metrics
+
+Manually you can visit http://localhost:3000/metrics?marathon-url=http://your.marathon.url to see the generated metrics.
+
+If you want to integrate it with your prometheus. You can append this to your prometheus config:
+
+```yaml
+- job_name: 'marathon-apps'
+  params:
+    marathon-url:
+      - http://your.marathon.url
+  static_configs:
+    - targets: ['localhost:3000'] # this exporter's host and port
+```
 
 ## How to develop
 
